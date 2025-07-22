@@ -38,6 +38,8 @@ For iOS, remember to install CocoaPods dependencies (this only needs to be run o
 
 The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
 
+https://reactnative.dev/docs/getting-started-without-a-framework
+
 ```sh
 bundle install
 ```
