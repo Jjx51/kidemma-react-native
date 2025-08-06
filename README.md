@@ -97,3 +97,5 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- [React Native Project Folder And File Structure](https://github.com/sury4karmakar/ReactNative-ProjectStructure) - Naming Convention for File Structure
+- [Imports Stay Clean](https://medium.com/%40akshit5230/imports-exports-react-native-with-typescript-59e6460b0baa) - Imports & Exports
