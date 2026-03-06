@@ -35,6 +35,13 @@ local.properties
 !debug.keystore
 .kotlin/
 
+# iOS
+#
+ios/vendor/
+ios/system/
+ios/.bundle/
+ios/Gemfile.lock
+
 # node.js
 #
 node_modules/
