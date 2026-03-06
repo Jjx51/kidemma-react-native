@@ -1,4 +1,4 @@
-package com.kidemmareactnative
+package com.kidemma.app
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

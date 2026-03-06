@@ -26,7 +26,7 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const screenOptions = ({ route }: { route: { name: string } }) => ({
   headerShown: false,
-  tabBarActiveTintColor: COLORS.primary,
+  tabBarActiveTintColor: COLORS.tabActive,
   tabBarInactiveTintColor: COLORS.tabInactive,
   tabBarStyle: styles.tabBar,
   tabBarLabelStyle: styles.tabLabel,

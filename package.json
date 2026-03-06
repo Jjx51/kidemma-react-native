@@ -9,6 +9,7 @@
     "start": "react-native start",
     "test": "jest",
     "start:clean": "react-native start --reset-cache",
+    "clean:android": "cd android && ./gradlew clean && cd ..",
     "pods": "cd ios && pod install && cd .."
   },
   "dependencies": {
