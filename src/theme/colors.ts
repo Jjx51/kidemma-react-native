@@ -36,6 +36,7 @@ export const COLORS = {
   inputBorderAlt: '#D3D3D3',
   textDark: '#4A4A4A',
   textMuted: '#858A8E',
+  tabActive: '#C86F5F',
   tabInactive: '#858A8E',
   border: '#D3D3D3',
   placeholder: '#D3D3D3',
