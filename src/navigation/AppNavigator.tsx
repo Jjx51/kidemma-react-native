@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { hide as hideSplash} from 'react-native-bootsplash';
 
 import { useAuth } from '@features/auth';
-import { COLORS } from '@theme';
 import { ProfileScreen } from '@features/profile/screens';
 import type { RootStackParamList } from './types';
 import { AuthNavigator } from './AuthNavigator';
@@ -14,13 +14,13 @@ const Root = createNativeStackNavigator<RootStackParamList>();
 export function AppNavigator() {
   const { isAuthenticated, isInitializing } = useAuth();
 
-  if (isInitializing) {
-    return (
-      <View style={styles.view}>
-        <ActivityIndicator color={COLORS.primary} size="large" />
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (!isInitializing) {
+      hideSplash({ fade: true });
+    }
+  }, [isInitializing]);
+
+  if (isInitializing) return null;
 
   return (
     <Root.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
@@ -41,12 +41,3 @@ export function AppNavigator() {
     </Root.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLORS.background,
-  },
-});
