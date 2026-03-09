@@ -26,6 +26,8 @@
 		A5251EA9F356483AB3417657 /* poppins_extra_bold_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99C222AEAC4440EFB5A7538F /* poppins_extra_bold_italic.ttf */; };
 		AB1C6285444E4F8E91141299 /* poppins_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FCAEAFC03D44B0B987FF4FC /* poppins_italic.ttf */; };
 		BD96A1E22FA74409A0685D61 /* Ginger_Biscuit_Extrude.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EC2EC0A2ACA4B09890CDDA2 /* Ginger_Biscuit_Extrude.ttf */; };
+		CD28B2324CC847198856C599 /* BootSplash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C2E007C24442D1907D0BDA /* BootSplash.storyboard */; };
+		CEB5582D11D149BDA533A226 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D76F1834F8141F3BA9BD091 /* Colors.xcassets */; };
 		CFDBCB3F5AE043838CEC6B73 /* poppins_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E59B9FF00104AAA8E7FD3B4 /* poppins_regular.ttf */; };
 		D478E74E71AC9B2C4671BC85 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */; };
 		E1C27E7827AF41F88B9C7799 /* poppins_light_italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54C5ECA79DAB4AFCBB704654 /* poppins_light_italic.ttf */; };
@@ -46,11 +48,13 @@
 		4EC2EC0A2ACA4B09890CDDA2 /* Ginger_Biscuit_Extrude.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ginger_Biscuit_Extrude.ttf; path = ../src/assets/fonts/Ginger_Biscuit_Extrude.ttf; sourceTree = "<group>"; };
 		54C5ECA79DAB4AFCBB704654 /* poppins_light_italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_light_italic.ttf; path = ../src/assets/fonts/poppins_light_italic.ttf; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-kidemmaReactNative.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-kidemmaReactNative.release.xcconfig"; path = "Target Support Files/Pods-kidemmaReactNative/Pods-kidemmaReactNative.release.xcconfig"; sourceTree = "<group>"; };
+		5D76F1834F8141F3BA9BD091 /* Colors.xcassets */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = folder.assetcatalog; name = Colors.xcassets; path = kidemmaReactNative/Colors.xcassets; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-kidemmaReactNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-kidemmaReactNative.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E59B9FF00104AAA8E7FD3B4 /* poppins_regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_regular.ttf; path = ../src/assets/fonts/poppins_regular.ttf; sourceTree = "<group>"; };
 		71A9D94C57D249929960C1BF /* poppins_thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_thin.ttf; path = ../src/assets/fonts/poppins_thin.ttf; sourceTree = "<group>"; };
 		761780EC2CA45674006654EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = kidemmaReactNative/AppDelegate.swift; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = kidemmaReactNative/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		97C2E007C24442D1907D0BDA /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = kidemmaReactNative/BootSplash.storyboard; sourceTree = "<group>"; };
 		981948F7909B457AB7E2AB43 /* poppins_extra_light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_extra_light.ttf; path = ../src/assets/fonts/poppins_extra_light.ttf; sourceTree = "<group>"; };
 		99C222AEAC4440EFB5A7538F /* poppins_extra_bold_italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_extra_bold_italic.ttf; path = ../src/assets/fonts/poppins_extra_bold_italic.ttf; sourceTree = "<group>"; };
 		9D7777B0A42A4CAFBA438A07 /* poppins_bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = poppins_bold.ttf; path = ../src/assets/fonts/poppins_bold.ttf; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */,
+				97C2E007C24442D1907D0BDA /* BootSplash.storyboard */,
+				5D76F1834F8141F3BA9BD091 /* Colors.xcassets */,
 			);
 			name = kidemmaReactNative;
 			sourceTree = "<group>";
@@ -241,6 +247,8 @@
 				AB1C6285444E4F8E91141299 /* poppins_italic.ttf in Resources */,
 				3E7A2AB622B5410D83D6904F /* Ginger_Biscuit.ttf in Resources */,
 				BD96A1E22FA74409A0685D61 /* Ginger_Biscuit_Extrude.ttf in Resources */,
+				CD28B2324CC847198856C599 /* BootSplash.storyboard in Resources */,
+				CEB5582D11D149BDA533A226 /* Colors.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,13 +279,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-kidemmaReactNative/Pods-kidemmaReactNative-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-kidemmaReactNative/Pods-kidemmaReactNative-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -314,13 +318,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-kidemmaReactNative/Pods-kidemmaReactNative-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-kidemmaReactNative/Pods-kidemmaReactNative-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -464,7 +464,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
@@ -533,7 +536,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
