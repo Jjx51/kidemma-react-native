@@ -1,0 +1,1 @@
+export { OthersMenuScreen } from './OthersMenuScreen';

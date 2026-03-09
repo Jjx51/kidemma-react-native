@@ -23,11 +23,11 @@ export type OthersStackParamList = {
 // ─── Main Tab ─────────────────────────────────────────────────────────────────
 
 export type MainTabParamList = {
-  Home: undefined;
-  Posts: undefined;
-  Family: undefined;
-  Forum: undefined;
-  Others: undefined; // renders OthersStackNavigator
+  HomeTab: undefined;
+  PostsTab: undefined;
+  FamilyTab: undefined;
+  ForumTab: undefined;
+  OthersTab: undefined;
 };
 
 // ─── Home Stack (nested inside Inicio tab) ────────────────────────────────────
@@ -65,6 +65,7 @@ export type ForumStackParamList = {
 export type RootStackParamList = {
   Auth: undefined;
   Main: undefined;
+  Profile: undefined;
 };
 
 // ─── Screen Props Helpers ─────────────────────────────────────────────────────

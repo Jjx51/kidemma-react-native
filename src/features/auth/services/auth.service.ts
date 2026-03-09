@@ -1,46 +1,62 @@
-import { delay } from '@utils/async.utils';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  getIdToken
+} from '@react-native-firebase/auth';
+
 import type {
   AuthResponse,
   LoginPayload,
   RegisterPayload,
 } from '../types/auth.types';
 
+const auth = getAuth();
+
 export const AuthService = {
-  // ─── Mock Login ───────────────────────────────────────────────────────────────
   login: async (payload: LoginPayload): Promise<AuthResponse> => {
-    await delay(2000);
-
-    if (payload.email === 'test@kidemma.com' && payload.password === '123456') {
-      return {
-        user: {
-          id: '1',
-          email: payload.email,
-          fullName: 'Luis Martinez',
-          phone: '614-000-0000',
-          role: 'dad',
-          token: 'mock-jwt-token',
-        },
-        token: 'mock-jwt-token',
-      };
-    }
-
-    throw new Error('Correo o contraseña incorrectos');
-  },
-
-  // ─── Mock Register ────────────────────────────────────────────────────────────
-  register: async (payload: RegisterPayload): Promise<AuthResponse> => {
-    await delay(1200);
-
+    const { user } = await signInWithEmailAndPassword(
+      auth,
+      payload.email,
+      payload.password,
+    );
+    const token = await getIdToken(user);
     return {
       user: {
-        id: '2',
-        email: payload.email,
+        id: user.uid,
+        email: user.email ?? '',
+        fullName: user.displayName ?? '',
+        phone: user.phoneNumber ?? '',
+        role: 'dad',
+        token,
+      },
+      token,
+    };
+  },
+
+  register: async (payload: RegisterPayload): Promise<AuthResponse> => {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      payload.email,
+      payload.password,
+    );
+    await user.updateProfile({ displayName: payload.fullName });
+    const token = await getIdToken(user);
+    return {
+      user: {
+        id: user.uid,
+        email: user.email ?? '',
         fullName: payload.fullName,
         phone: payload.phone,
         role: payload.role,
-        token: 'mock-jwt-token-new',
+        token,
       },
-      token: 'mock-jwt-token-new',
+      token,
     };
+  },
+
+  logout: async (): Promise<void> => {
+    await signOut(auth);
   },
 };
