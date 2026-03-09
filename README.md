@@ -1,99 +1,128 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Kidemma — React Native
 
-# Getting Started
+Children's activity and class management app for parents. This is one of four implementations of Kidemma (Native iOS, Native Android, React Native, Flutter) — all sharing a single Firebase project.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## Prerequisites
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- Node.js 18+
+- Ruby 3.2.0 (via rbenv)
+- Xcode 15+
+- Android Studio + SDK 36
+- CocoaPods via Bundler
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+If you haven't set up your environment yet, follow the [React Native environment setup guide](https://reactnative.dev/docs/set-up-your-environment).
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
+## Firebase Setup
+
+This project uses Firebase for authentication. The config files are **not committed to git** and must be added manually after cloning. For access contact jorge.l.hernandez
+
+1. Go to [Firebase Console](https://console.firebase.google.com) → Kidemma project → Project Settings
+2. Download `GoogleService-Info.plist` → place at `ios/kidemmaReactNative/GoogleService-Info.plist`
+3. Download `google-services.json` → place at `android/app/google-services.json`
+
+---
+
+## Getting Started
+
+### 1. Install dependencies
+```bash
+npm install
+```
+
+### 2. iOS — install pods
+```bash
+# First time only — install bundler dependencies
+cd ios && bundle install && cd ..
+
+# Every time native dependencies change
+yarn pods
+```
+
+### 3. Link font assets
+```bash
+npx react-native-asset
+cp node_modules/react-native-vector-icons/Fonts/Ionicons.ttf android/app/src/main/assets/fonts/
+```
+
+### 4. Start Metro
+```bash
 yarn start
+
+# Reset cache if you have module resolution issues
+yarn start:clean
 ```
 
-## Step 2: Build and run your app
+### 5. Run the app
+```bash
+# iOS — target specific simulator
+yarn ios --simulator "iPhone 16e"
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+# iOS — run on physical device
+yarn ios:device
 
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
+# Android
 yarn android
+
+# Clean Android build
+yarn clean:android
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-https://reactnative.dev/docs/getting-started-without-a-framework
-
-```sh
-bundle install
+## Project Structure
+```
+src/
+  assets/          # fonts, images
+  components/      # shared UI components (AppHeader, Button, etc.)
+  features/        # feature modules (auth, profile, home, etc.)
+    auth/
+      components/
+      hooks/
+      screens/
+      services/
+      store/
+      types/
+  navigation/      # navigators and type definitions
+  theme/           # colors, typography, spacing, shadows
+  hooks/           # shared hooks
+  utils/           # helpers
 ```
 
-Then, and every time you update your native dependencies, run:
+---
 
-```sh
-bundle exec pod install
-```
+## Path Aliases
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+| Alias          | Path                  |
+|----------------|-----------------------|
+| `@theme`       | `src/theme`           |
+| `@components`  | `src/components`      |
+| `@features`    | `src/features`        |
+| `@navigation`  | `src/navigation`      |
+| `@assets`      | `src/assets`          |
+| `@hooks`       | `src/hooks`           |
+| `@services`    | `src/services`        |
+| `@store`       | `src/store`           |
+| `@utils`       | `src/utils`           |
 
-```sh
-# Using npm
-npm run ios
+---
 
-# OR using Yarn
-yarn ios
-```
+## Tech Stack
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+- **React Native** 0.80 — New Architecture disabled (pending dependency support)
+- **Navigation** — React Navigation v7 (native stack + bottom tabs)
+- **State** — Zustand
+- **Auth** — Firebase Auth via `@react-native-firebase`
+- **Icons** — react-native-vector-icons (Ionicons)
+- **Fonts** — Poppins (body), Ginger Biscuit (titles — personal use only, replace before production)
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## Notes
 
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- New Architecture is disabled on both platforms (`newArchEnabled=false` in `android/gradle.properties`, `RCT_NEW_ARCH_ENABLED=0` during pod install) due to compatibility issues with current dependencies
+- Always open `ios/kidemmaReactNative.xcworkspace`, never `.xcodeproj`
+- Run `yarn ios` with `--simulator` flag to avoid attempting install on WiFi-paired devices

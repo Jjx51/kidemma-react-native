@@ -40,9 +40,10 @@ export const COLORS = {
   tabInactive: '#858A8E',
   border: '#D3D3D3',
   placeholder: '#D3D3D3',
-  
+  iconBackground: '#EAEAEA',
+
   // ---- Common colors ----------------------------------------------------------
-  kdBlack: '#000'
+  kdBlack: '#000',
 } as const;
 
 export type ColorKey = keyof typeof COLORS;

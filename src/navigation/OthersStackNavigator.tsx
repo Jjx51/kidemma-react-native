@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import type { OthersStackParamList } from './types';
 
-import { OthersMenuScreen } from '@features/others/screens/OthersMenuScreen';
+import { OthersMenuScreen } from '@features/others/screens';
 
 const Stack = createNativeStackNavigator<OthersStackParamList>();
 
