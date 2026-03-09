@@ -10,22 +10,23 @@ import { FamilyStackNavigator } from './FamilyStackNavigator';
 import { ForumStackNavigator } from './ForumStackNavigator';
 import { OthersStackNavigator } from './OthersStackNavigator';
 import { COLORS } from '@theme';
+import { AppHeader } from '@components/AppHeader';
 
 const TAB_ICONS: Record<
   keyof MainTabParamList,
   { active: string; inactive: string }
 > = {
-  Home: { active: 'home', inactive: 'home-outline' },
-  Posts: { active: 'images', inactive: 'images-outline' },
-  Family: { active: 'people', inactive: 'people-outline' },
-  Forum: { active: 'chatbubbles', inactive: 'chatbubbles-outline' },
-  Others: { active: 'grid', inactive: 'grid-outline' },
+  HomeTab: { active: 'home', inactive: 'home-outline' },
+  PostsTab: { active: 'images', inactive: 'images-outline' },
+  FamilyTab: { active: 'people', inactive: 'people-outline' },
+  ForumTab: { active: 'chatbubbles', inactive: 'chatbubbles-outline' },
+  OthersTab: { active: 'grid', inactive: 'grid-outline' },
 };
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 const screenOptions = ({ route }: { route: { name: string } }) => ({
-  headerShown: false,
+  header: () => <AppHeader />,
   tabBarActiveTintColor: COLORS.tabActive,
   tabBarInactiveTintColor: COLORS.tabInactive,
   tabBarStyle: styles.tabBar,
@@ -47,29 +48,29 @@ const screenOptions = ({ route }: { route: { name: string } }) => ({
 
 export function MainTabNavigator() {
   return (
-    <Tab.Navigator initialRouteName="Home" screenOptions={screenOptions}>
+    <Tab.Navigator initialRouteName="HomeTab" screenOptions={screenOptions}>
       <Tab.Screen
-        name="Home"
+        name="HomeTab"
         component={HomeStackNavigator}
         options={{ tabBarLabel: 'Inicio' }}
       />
       <Tab.Screen
-        name="Posts"
+        name="PostsTab"
         component={PostsStackNavigator}
         options={{ tabBarLabel: 'Posts' }}
       />
       <Tab.Screen
-        name="Family"
+        name="FamilyTab"
         component={FamilyStackNavigator}
         options={{ tabBarLabel: 'Mi familia' }}
       />
       <Tab.Screen
-        name="Forum"
+        name="ForumTab"
         component={ForumStackNavigator}
         options={{ tabBarLabel: 'Foro' }}
       />
       <Tab.Screen
-        name="Others"
+        name="OthersTab"
         component={OthersStackNavigator}
         options={{ tabBarLabel: 'Otros' }}
       />
