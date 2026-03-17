@@ -23,6 +23,9 @@ export function LoginForm() {
     isLoading,
     error,
     handleLogin,
+    isResendLoading,
+    resendSuccess,
+    handleResendInvite,
   } = useLoginForm();
 
   return (
@@ -98,6 +101,26 @@ export function LoginForm() {
           <Text style={styles.buttonText}>Iniciar sesión</Text>
         )}
       </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.ghostButton}
+        onPress={handleResendInvite}
+        disabled={resendSuccess || isResendLoading}
+        activeOpacity={resendSuccess || isResendLoading ? 1 : 0.6}
+      >
+        <Text
+          style={[
+            styles.ghostButtonText,
+            (resendSuccess || isResendLoading) &&
+              styles.ghostButtonTextDisabled,
+          ]}
+        >
+          {isResendLoading
+            ? 'Enviando...'
+            : resendSuccess
+            ? '¡Listo! Si tu correo está registrado, recibirás un enlace en tu bandeja de entrada'
+            : '¿Primera vez? Revisa tu correo o reenvía la invitación'}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -154,5 +177,19 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     ...TYPOGRAPHY.buttonPrimary,
+  },
+  ghostButton: {
+    alignItems: 'center',
+    marginTop: SPACING.md,
+    paddingVertical: SPACING.sm,
+  },
+  ghostButtonText: {
+    ...TYPOGRAPHY.caption,
+    color: COLORS.title,
+    textDecorationLine: 'underline',
+  },
+  ghostButtonTextDisabled: {
+    color: COLORS.textMuted,
+    textDecorationLine: 'none',
   },
 });
