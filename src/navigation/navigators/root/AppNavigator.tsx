@@ -1,13 +1,13 @@
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { hide as hideSplash } from 'react-native-bootsplash';
 
 import { LoginScreen, useAuth } from '@features/auth';
-import { COLORS } from '@theme';
 import { UserRole } from '@features/auth/enums';
 import type { RootStackParamList } from '../../types';
 import { CompleteRegistrationNavigator } from '../completeRegistration/CompleteRegistrationNavigator';
 import { AdminAuthenticatedNavigator } from '../admin/AdminAuthenticatedNavigator';
 import { ParentAuthenticatedNavigator } from '../parent/ParentAuthenticatedNavigator';
+import { useEffect } from 'react';
 
 const Root = createNativeStackNavigator<RootStackParamList>();
 
@@ -17,13 +17,13 @@ export function AppNavigator() {
   const isAdmin = user?.role === UserRole.Admin;
   const isProfileComplete = user?.isProfileComplete ?? false;
 
-  if (isInitializing) {
-    return (
-      <View style={styles.view}>
-        <ActivityIndicator color={COLORS.primary} size="large" />
-      </View>
-    );
-  }
+  useEffect(() => {
+    if (!isInitializing) {
+      hideSplash({ fade: true });
+    }
+  }, [isInitializing]);
+
+  if (isInitializing) return null;
 
   return (
     <Root.Navigator screenOptions={{ headerShown: false, animation: 'fade' }}>
@@ -42,12 +42,3 @@ export function AppNavigator() {
     </Root.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  view: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: COLORS.background,
-  },
-});

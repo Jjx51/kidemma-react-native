@@ -106,7 +106,7 @@ export function FamiliesListScreen() {
   );
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
+    <View style={styles.container}>
       <View style={styles.searchRow}>
         <View style={styles.searchContainer}>
           <TextInput
