@@ -1,73 +1,36 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
-  TextInput,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import IonIcon from 'react-native-vector-icons/Ionicons';
-import {
-  getFirestore,
-  collection,
-  getDocs,
-} from '@react-native-firebase/firestore';
 
 import { COLORS, TYPOGRAPHY, SPACING, SHADOWS } from '@theme';
 import { AdminStackParamList } from '@navigation/types';
-import type { Child, Family, FamilyMember } from '@types';
-import { QueryDocumentSnapshot } from '@react-native-firebase/app/dist/module/internal/web/firebaseFirestore';
+import type { Child, Family, FamilyMember } from '@kdTypes';
+import { Button, Card, SearchBar } from '@components';
+import { useFamilies, useFamiliesSearch } from '../hooks';
 
 type NavigationProp = NativeStackNavigationProp<AdminStackParamList>;
 
-const db = getFirestore();
-
 export function FamiliesListScreen() {
   const navigation = useNavigation<NavigationProp>();
-  const insets = useSafeAreaInsets();
-  const [families, setFamilies] = useState<Family[]>([]);
-  const [filtered, setFiltered] = useState<Family[]>([]);
-  const [search, setSearch] = useState('');
-  const [loading, setLoading] = useState(true);
+  const { families, loading } = useFamilies();
+  const { search, setSearch, filtered } = useFamiliesSearch(families);
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
-  useEffect(() => {
-    fetchFamilies();
-  }, []);
-
-  useEffect(() => {
-    if (search.trim() === '') {
-      setFiltered(families);
-    } else {
-      setFiltered(
-        families.filter(
-          f =>
-            f.name.toLowerCase().includes(search.toLowerCase()) ||
-            f.alias?.toLowerCase().includes(search.toLowerCase()),
-        ),
-      );
-    }
-  }, [search, families]);
-
-  const fetchFamilies = async () => {
-    try {
-      const snap = await getDocs(collection(db, 'FAMILIES'));
-      const data = snap.docs.map((doc: QueryDocumentSnapshot) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as Family[];
-      setFamilies(data);
-      setFiltered(data);
-    } catch (e) {
-      console.error('fetchFamilies error:', e);
-    } finally {
-      setLoading(false);
-    }
+  const handleFilter = () => {
+    // TODO: implement filter logic
   };
+
+  function goToNewFamily() {
+    navigation.getParent()?.navigate('Families', { screen: 'NewFamilyForm' });
+  }
 
   const renderAvatars = (members: FamilyMember[], children: Child[]) => {
     const all = [...(members ?? []), ...(children ?? [])].slice(0, 4);
@@ -78,7 +41,7 @@ export function FamiliesListScreen() {
             <Text style={styles.avatarText}>
               {'email' in item
                 ? item.displayName?.charAt(0).toUpperCase()
-                : item.name?.charAt(0).toUpperCase()}
+                : item.fullName?.charAt(0).toUpperCase()}
             </Text>
           </View>
         ))}
@@ -87,53 +50,37 @@ export function FamiliesListScreen() {
   };
 
   const renderFamily = ({ item }: { item: Family }) => (
-    <TouchableOpacity
-      style={styles.card}
+    <Card
       onPress={() => navigation.navigate('FamilyDetail', { familyId: item.id })}
-      activeOpacity={0.8}
     >
       <View style={styles.cardContent}>
         <View style={styles.cardInfo}>
           <Text style={styles.familyName}>Familia: {item.name}</Text>
-          {item.alias ? (
+          {item.alias && (
             <Text style={styles.familyAlias}>Alias: {item.alias}</Text>
-          ) : null}
+          )}
           {renderAvatars(item.members, item.children)}
         </View>
         <IonIcon name="arrow-forward" size={20} color={COLORS.title} />
       </View>
-    </TouchableOpacity>
+    </Card>
   );
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchRow}>
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Escribe algo"
-            placeholderTextColor={COLORS.textMuted}
-            value={search}
-            onChangeText={setSearch}
-          />
-          <IonIcon name="search-outline" size={20} color={COLORS.textMuted} />
-        </View>
-        <TouchableOpacity style={styles.filterButton}>
-          <IonIcon name="options-outline" size={20} color={COLORS.textMuted} />
-        </TouchableOpacity>
-      </View>
+      <SearchBar
+        placeholder="Escribe algo"
+        value={search}
+        onChangeText={setSearch}
+        onFilterPress={handleFilter}
+        filterActive={isFilterActive}
+      />
 
-      <TouchableOpacity
-        style={styles.createButton}
-        onPress={() =>
-          navigation
-            .getParent()
-            ?.navigate('Families', { screen: 'NewFamilyForm' })
-        }
-        activeOpacity={0.8}
-      >
-        <Text style={styles.createButtonText}>Crear familia</Text>
-      </TouchableOpacity>
+      <Button
+        label="Crear familia"
+        onPress={goToNewFamily}
+        style={{ marginBottom: SPACING.md }}
+      />
 
       {loading ? (
         <ActivityIndicator
@@ -159,57 +106,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
     paddingHorizontal: SPACING.lg,
   },
-  searchRow: {
-    flexDirection: 'row',
-    gap: SPACING.sm,
-    marginBottom: SPACING.md,
-    marginTop: SPACING.md,
-  },
-  searchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    paddingHorizontal: SPACING.md,
-    ...SHADOWS.sm,
-  },
-  searchInput: {
-    flex: 1,
-    height: 48,
-    ...TYPOGRAPHY.body,
-    color: COLORS.text,
-  },
-  filterButton: {
-    width: 48,
-    height: 48,
-    backgroundColor: COLORS.white,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    ...SHADOWS.sm,
-  },
-  createButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 12,
-    height: 52,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: SPACING.lg,
-  },
-  createButtonText: {
-    ...TYPOGRAPHY.buttonPrimary,
-    color: COLORS.white,
-  },
   list: {
     gap: SPACING.md,
     paddingBottom: SPACING.xl,
-  },
-  card: {
-    backgroundColor: COLORS.white,
-    borderRadius: 16,
-    padding: SPACING.md,
-    ...SHADOWS.sm,
   },
   cardContent: {
     flexDirection: 'row',

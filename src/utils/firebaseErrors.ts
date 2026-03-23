@@ -14,6 +14,8 @@ export function mapFirebaseError(code: string): string {
       return 'Demasiados intentos. Intenta más tarde';
     case 'auth/network-request-failed':
       return 'Error de conexión. Verifica tu internet';
+    case 'auth/email-already-in-use':
+      return 'El correo electrónico ya se encuentra en uso, favor de verificar.';
     default:
       return 'Ocurrió un error. Intenta de nuevo';
   }

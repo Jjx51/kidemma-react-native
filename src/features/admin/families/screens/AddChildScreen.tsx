@@ -5,7 +5,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { AdminStackParamList } from '@navigation/types';
 import { AddChildForm } from '../components';
 import { useCreateFamily } from '../hooks/useCreateFamily';
-import type { Child } from '@types';
+import { Gender, type BaseChild } from '@kdTypes';
 
 type NavigationProp = NativeStackNavigationProp<AdminStackParamList>;
 
@@ -13,17 +13,17 @@ export function AddChildScreen() {
   const navigation = useNavigation<NavigationProp>();
   const { addChild } = useCreateFamily();
 
-  const [form, setForm] = useState<Partial<Child>>({
-    name: '',
-    gender: 'male',
+  const [form, setForm] = useState<BaseChild>({
+    fullName: '',
+    gender: Gender.Male,
   });
 
-  const handleChange = (field: keyof Partial<Child>, value: string) => {
+  const handleChange = (field: keyof BaseChild, value: string) => {
     setForm(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = () => {
-    addChild({ name: form.name.trim(), gender: form.gender });
+    addChild({ fullName: form.fullName!.trim(), gender: form.gender! });
     navigation.goBack();
   };
 

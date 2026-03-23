@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { hide as hideSplash } from 'react-native-bootsplash';
 
 import { LoginScreen, useAuth } from '@features/auth';
-import { UserRole } from '@features/auth/enums';
+import { UserRole } from '@kdTypes';
 import type { RootStackParamList } from '../../types';
 import { CompleteRegistrationNavigator } from '../completeRegistration/CompleteRegistrationNavigator';
 import { AdminAuthenticatedNavigator } from '../admin/AdminAuthenticatedNavigator';

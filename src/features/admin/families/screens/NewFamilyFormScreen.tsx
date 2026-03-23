@@ -3,7 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import type { AdminStackParamList } from '@navigation/types';
-import type { FamilyFormData } from '@types';
+import type { FamilyFormData } from '@kdTypes';
 import { HeaderBackButton } from '@components';
 import { NewFamilyForm } from '../components';
 import { useCreateFamily } from '../hooks';

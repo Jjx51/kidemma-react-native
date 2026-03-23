@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import {
   getFirestore,
@@ -17,7 +17,7 @@ import {
 
 import { useAuthStore } from '@auth/store/auth.store';
 import type { AdminStackParamList } from '@navigation/types';
-import type { FamilyFormData } from '@types';
+import type { FamilyFormData } from '@kdTypes';
 import { getSecondaryAuth } from '@services/secondaryAuth';
 import { CreateFamilySummaryForm } from '../components/CreateFamilySummaryForm';
 import { useCreateFamily } from '../hooks/useCreateFamily';
@@ -97,10 +97,23 @@ export function CreateFamilySummaryScreen() {
 
       reset();
 
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: 'AdminTabs',
+              state: {
+                routes: [{ name: 'FamiliesTab' }],
+              },
+            },
+          ],
+        }),
+      );
       Alert.alert(
         '¡Familia creada!',
         'Se han enviado las invitaciones a los miembros de la familia.',
-        [{ text: 'OK', onPress: () => navigation.navigate('FamiliesList') }],
+        [{ text: 'OK' }],
       );
     } catch (e: any) {
       Alert.alert(

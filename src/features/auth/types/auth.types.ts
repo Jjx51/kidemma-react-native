@@ -1,4 +1,4 @@
-import { ParentRole, UserRole } from '../enums';
+import { ParentRole, UserRole } from '@kdTypes';
 
 export interface User {
   id: string;

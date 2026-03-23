@@ -1,11 +1,27 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationOptions,
+} from '@react-navigation/native-stack';
 
 import { CompleteRegistrationStackParamList } from '@navigation/types';
-import { CompleteRegistrationFormScreen } from '@features/registration/screens/CompleteRegistrationScreen';
-import { ConfirmChildrenScreen } from '@features/registration/screens/ConfirmChildrenScreen';
-import { RegistrationSuccessScreen } from '@features/registration/screens/RegistrationSuccessScreen';
+import {
+  CompleteRegistrationFormScreen,
+  ConfirmChildrenScreen,
+  RegistrationSuccessScreen,
+  CompleteChildScreen,
+} from '@features/registration/screens';
+import { COLORS, TYPOGRAPHY } from '@theme';
 
 const Stack = createNativeStackNavigator<CompleteRegistrationStackParamList>();
+
+const screenOptions: NativeStackNavigationOptions = {
+  headerTintColor: COLORS.title,
+  headerTitleStyle: { ...TYPOGRAPHY.sectionTitle },
+  headerShown: true,
+  headerBackVisible: true,
+  headerShadowVisible: false,
+  headerBackButtonDisplayMode: 'minimal' as const,
+};
 
 export function CompleteRegistrationNavigator() {
   return (
@@ -15,6 +31,14 @@ export function CompleteRegistrationNavigator() {
         component={CompleteRegistrationFormScreen}
       />
       <Stack.Screen name="ConfirmChildren" component={ConfirmChildrenScreen} />
+      <Stack.Screen
+        name="CompleteChildForm"
+        component={CompleteChildScreen}
+        options={{
+          ...screenOptions,
+          title: 'Completar datos',
+        }}
+      />
       <Stack.Screen
         name="RegistrationSuccess"
         component={RegistrationSuccessScreen}

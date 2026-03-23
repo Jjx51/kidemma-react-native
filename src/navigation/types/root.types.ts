@@ -9,5 +9,6 @@ export type RootStackParamList = {
 export type CompleteRegistrationStackParamList = {
   CompleteRegistrationForm: undefined;
   ConfirmChildren: undefined;
+  CompleteChildForm: { childId: string };
   RegistrationSuccess: undefined;
 };

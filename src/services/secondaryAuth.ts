@@ -16,7 +16,7 @@ export async function getSecondaryAuth() {
         appId: Config.FIREBASE_APP_ID!,
         databaseURL: 'https://kidemma-default-rtdb.firebaseio.com',
         storageBucket: 'kidemma-932eb.firebasestorage.app',
-        messagingSenderId: '603709341379'
+        messagingSenderId: '603709341379',
       },
       SECONDARY_APP_NAME,
     ));

@@ -1,15 +1,15 @@
 import { create } from 'zustand';
-import type { FamilyFormData, FamilyMember, Child } from '@types';
+import type { FamilyFormData, FamilyMember, BaseChild } from '@kdTypes';
 
 interface CreateFamilyState {
   familyData: FamilyFormData;
   members: FamilyMember[];
-  children: Child[];
+  children: BaseChild[];
 
   setFamilyData: (data: FamilyFormData) => void;
   addMember: (member: FamilyMember) => void;
   removeMember: (email: string) => void;
-  addChild: (child: Child) => void;
+  addChild: (child: BaseChild) => void;
   removeChild: (name: string) => void;
   reset: () => void;
 }
@@ -39,7 +39,7 @@ export const useCreateFamily = create<CreateFamilyState>(set => ({
 
   removeChild: name =>
     set(state => ({
-      children: state.children.filter(k => k.name !== name),
+      children: state.children.filter(k => k.fullName !== name),
     })),
 
   reset: () =>

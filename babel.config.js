@@ -12,12 +12,13 @@ module.exports = {
           '@features': './src/features',
           '@navigation': './src/navigation',
           '@services': './src/services',
-          '@hooks': './src/hooks',
+          '@hooks': './src/hooks/index.ts',
           '@constants': './src/constants',
           '@utils': './src/utils',
           '@assets': './src/assets',
-          '@theme': './src/theme',
-          '@types': './src/types',
+          '@theme': './src/theme/index.ts',
+          '@kdTypes': './src/types/index.ts',
+          '@store': './src/store/index.ts',
 
           // auth
           '@auth': './src/features/auth',

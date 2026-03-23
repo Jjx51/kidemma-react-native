@@ -1,55 +1,43 @@
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { COLORS, TYPOGRAPHY, SPACING } from '@theme';
+import { View, StyleSheet, Image } from 'react-native';
 
-interface Props {
+import { COLORS, SPACING } from '@theme';
+import { Button, ScreenContainer, ScreenHeader } from '@components';
+
+interface RegistrationSuccessFormProps {
   onFinish: () => void;
 }
 
-export function RegistrationSuccessForm({ onFinish }: Props) {
-  const insets = useSafeAreaInsets();
-
+export function RegistrationSuccessForm({
+  onFinish,
+}: RegistrationSuccessFormProps) {
   return (
-    <View
-      style={[
-        styles.container,
-        { paddingTop: insets.top, paddingBottom: insets.bottom + SPACING.md },
-      ]}
-    >
+    <ScreenContainer>
       <View style={styles.content}>
         <View style={styles.illustrationContainer}>
           <Image
-            source={require('@assets/images/toys.png')}
+            source={require('@assets/images/ic_register_completed.png')}
             style={styles.illustration}
             resizeMode="contain"
           />
         </View>
 
-        <Text style={styles.title}>Registro completado</Text>
-        <Text style={styles.subtitle}>
-          Has finalizado con el registro, ahora puedes hacer uso de la
-          aplicación.
-        </Text>
-      </View>
+        <ScreenHeader
+          title="Registro completado"
+          subtitle="Has finalizado con el registro, ahora puedes hacer uso de la
+          aplicación."
+        />
 
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.finishButton}
+        <Button
           onPress={onFinish}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.finishButtonText}>Finalizar</Text>
-        </TouchableOpacity>
+          label="Finalizar"
+          style={styles.finishButton}
+        />
       </View>
-    </View>
+    </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
   content: {
     flex: 1,
     justifyContent: 'center',
@@ -70,30 +58,7 @@ const styles = StyleSheet.create({
     width: 160,
     height: 160,
   },
-  title: {
-    ...TYPOGRAPHY.screenTitle,
-    color: COLORS.title,
-    fontSize: 28,
-    textAlign: 'center',
-  },
-  subtitle: {
-    ...TYPOGRAPHY.body,
-    color: COLORS.text,
-    textAlign: 'center',
-  },
-  footer: {
-    paddingHorizontal: SPACING.lg,
-    paddingTop: SPACING.md,
-  },
   finishButton: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 12,
-    height: 52,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  finishButtonText: {
-    ...TYPOGRAPHY.buttonPrimary,
-    color: COLORS.white,
+    alignSelf: 'stretch',
   },
 });

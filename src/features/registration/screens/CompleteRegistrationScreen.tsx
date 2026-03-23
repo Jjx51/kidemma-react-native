@@ -3,23 +3,25 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import type { CompleteRegistrationStackParamList } from '@navigation/types';
-import { ParentRole } from '@features/auth/enums';
+import { ParentRole } from '@kdTypes';
 import {
   CompleteRegistrationForm,
   CompleteRegistrationFormData,
-} from '../components/CompleteRegistrationForm';
-import { useCompleteRegistration } from '../hooks/useCompleteRegistration';
+} from '../components';
+import { useRegistrationStore } from '../store';
+import { useAuth } from '@features/auth';
 
 type NavigationProp =
   NativeStackNavigationProp<CompleteRegistrationStackParamList>;
 
 export function CompleteRegistrationFormScreen() {
   const navigation = useNavigation<NavigationProp>();
-  const { setProfileData } = useCompleteRegistration();
+  const { setProfileData } = useRegistrationStore();
+  const { user } = useAuth();
 
   const [form, setForm] = useState<CompleteRegistrationFormData>({
     parentRole: ParentRole.Mom,
-    fullName: '',
+    fullName: user?.fullName ?? '',
     phone: '',
     phoneAdditional: '',
   });

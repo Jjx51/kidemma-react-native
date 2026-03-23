@@ -21,6 +21,7 @@ export function useLoginForm() {
   const isValid = email.trim().length > 0 && password.trim().length > 0;
 
   const handleLogin = () => {
+    setLocalError(null);
     if (!isValid) {
       return;
     }
