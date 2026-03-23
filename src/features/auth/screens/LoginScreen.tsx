@@ -3,8 +3,6 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -28,14 +26,6 @@ export function LoginScreen() {
 
           <LoginForm />
 
-          <TouchableOpacity
-            style={styles.adminLink}
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          >
-            <Text style={styles.adminLinkText}>
-              Toca aquí para ir al acceso administrador
-            </Text>
-          </TouchableOpacity>
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

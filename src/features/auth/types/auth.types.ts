@@ -1,4 +1,4 @@
-export type UserRole = 'mom' | 'dad' | 'other';
+import { ParentRole, UserRole } from '@kdTypes';
 
 export interface User {
   id: string;
@@ -6,6 +6,10 @@ export interface User {
   fullName: string;
   phone: string;
   role: UserRole;
+  familyId: string | null;
+  parentRole: ParentRole | null;
+  isActive: boolean;
+  isProfileComplete: boolean;
   token: string;
 }
 
@@ -20,7 +24,7 @@ export interface RegisterPayload {
   fullName: string;
   phone: string;
   phoneAdditional?: string;
-  role: UserRole;
+  parentRole: ParentRole;
 }
 
 export interface AuthResponse {
