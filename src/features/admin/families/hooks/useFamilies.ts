@@ -1,11 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getDocs, collection } from '@react-native-firebase/firestore';
-import { getFirestore } from '@react-native-firebase/firestore';
-import { QueryDocumentSnapshot } from '@react-native-firebase/app/dist/module/internal/web/firebaseFirestore';
 
+import { FamilyService } from '@services/family.service';
 import type { Family } from '@kdTypes';
-
-const db = getFirestore();
 
 export function useFamilies() {
   const [families, setFamilies] = useState<Family[]>([]);
@@ -18,11 +14,7 @@ export function useFamilies() {
 
   const fetchFamilies = async () => {
     try {
-      const snap = await getDocs(collection(db, 'FAMILIES'));
-      const data = snap.docs.map((doc: QueryDocumentSnapshot) => ({
-        id: doc.id,
-        ...(doc.data() as Omit<Family, 'id'>),
-      }));
+      const data = await FamilyService.fetchAll();
       setFamilies(data);
     } catch (e) {
       console.error('fetchFamilies error:', e);
