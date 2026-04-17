@@ -85,3 +85,5 @@ yarn-error.log
 google-services.json
 ios/kidemmaReactNative/GoogleService-Info.plist
 ios/GoogleService-Info.plist
+
+.env

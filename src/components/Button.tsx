@@ -1,137 +1,135 @@
-import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  StyleSheet,
   ActivityIndicator,
-  type TouchableOpacityProps,
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  TextStyle,
+  ViewStyle,
 } from 'react-native';
 
-import { COLORS, FONTS, FONT_SIZE } from '@theme';
+import { COLORS, SPACING, TYPOGRAPHY } from '@theme';
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+type ButtonVariant = 'primary' | 'outline' | 'text';
 
-interface ButtonProps extends TouchableOpacityProps {
+interface ButtonProps {
   label: string;
+  onPress: () => void;
   variant?: ButtonVariant;
-  isLoading?: boolean;
-  fullWidth?: boolean;
+  disabled?: boolean;
+  loading?: boolean;
+  style?: StyleProp<ViewStyle>;
 }
 
 export function Button({
   label,
+  onPress,
   variant = 'primary',
-  isLoading = false,
-  fullWidth = true,
-  disabled,
+  disabled = false,
+  loading = false,
   style,
-  ...rest
 }: ButtonProps) {
-  const isDisabled = disabled || isLoading;
+  const isDisabled = disabled || loading;
+
+  const containerStyles: Record<ButtonVariant, StyleProp<ViewStyle>> = {
+    primary: styles.primary,
+    outline: styles.outline,
+    text: styles.text,
+  };
+
+  const labelStyles: Record<ButtonVariant, StyleProp<TextStyle>> = {
+    primary: styles.labelPrimary,
+    outline: styles.labelOutline,
+    text: styles.labelText,
+  };
+
+  const indicatorColor: Record<ButtonVariant, string> = {
+    primary: COLORS.white,
+    outline: COLORS.primary,
+    text: COLORS.primary,
+  };
 
   return (
-    <TouchableOpacity
-      style={[
+    <Pressable
+      onPress={onPress}
+      disabled={isDisabled}
+      style={({ pressed }) => [
         styles.base,
-        styles[variant],
-        fullWidth && styles.fullWidth,
-        isDisabled && styles[`${variant}Disabled`],
+        containerStyles[variant],
+        isDisabled && variant !== 'text' && styles.disabled,
+        pressed && !isDisabled && styles.pressed,
         style,
       ]}
-      disabled={isDisabled}
-      activeOpacity={0.85}
-      {...rest}
     >
-      {isLoading ? (
-        <ActivityIndicator
-          color={
-            variant === 'primary'
-              ? COLORS.primaryButtonText
-              : COLORS.primaryButton
-          }
-          size="small"
-        />
+      {loading ? (
+        <ActivityIndicator color={indicatorColor[variant]} size="small" />
       ) : (
         <Text
           style={[
             styles.label,
-            styles[`${variant}Label`],
-            isDisabled && styles[`${variant}LabelDisabled`],
+            labelStyles[variant],
+            isDisabled &&
+              (variant === 'text'
+                ? styles.labelTextDisabled
+                : styles.labelDisabled),
           ]}
         >
           {label}
         </Text>
       )}
-    </TouchableOpacity>
+    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
-  // ─── Base ──────────────────────────────────────────────────────────────────
   base: {
-    height: 48,
+    height: 52,
     borderRadius: 12,
-    alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 24,
+    alignItems: 'center',
+    paddingHorizontal: SPACING.md,
   },
-  fullWidth: {
-    width: '100%',
-  },
-
-  // ─── Primary ───────────────────────────────────────────────────────────────
   primary: {
-    backgroundColor: COLORS.primaryButton,
+    backgroundColor: COLORS.primary,
   },
-  primaryDisabled: {
-    backgroundColor: COLORS.disabledButton,
-  },
-  primaryLabel: {
-    fontFamily: FONTS.bold,
-    fontSize: FONT_SIZE.md,
-    color: COLORS.primaryButtonText,
-  },
-  primaryLabelDisabled: {
-    color: COLORS.disabledButtonText,
-  },
-
-  // ─── Secondary ─────────────────────────────────────────────────────────────
-  secondary: {
-    backgroundColor: COLORS.secondaryButton,
+  outline: {
+    backgroundColor: 'transparent',
     borderWidth: 1.5,
-    borderColor: COLORS.secondaryButtonBorder,
+    borderColor: COLORS.primary,
   },
-  secondaryDisabled: {
+  disabled: {
     backgroundColor: COLORS.disabledButton,
-    borderColor: COLORS.disabledButton,
+    borderColor: 'transparent',
   },
-  secondaryLabel: {
-    fontFamily: FONTS.bold,
-    fontSize: FONT_SIZE.md,
-    color: COLORS.secondaryButtonText,
+  pressed: {
+    opacity: 0.8,
   },
-  secondaryLabelDisabled: {
-    color: COLORS.disabledButtonText,
-  },
-
-  // ─── Ghost ─────────────────────────────────────────────────────────────────
-  ghost: {
-    backgroundColor: 'transparent',
-  },
-  ghostDisabled: {
-    backgroundColor: 'transparent',
-  },
-  ghostLabel: {
-    fontFamily: FONTS.bold,
-    fontSize: FONT_SIZE.md,
-    color: COLORS.ghostButton,
-  },
-  ghostLabelDisabled: {
-    color: COLORS.disabledButtonText,
-  },
-
-  // ─── Shared label ──────────────────────────────────────────────────────────
   label: {
-    // base label — overridden per variant above
+    ...TYPOGRAPHY.buttonPrimary,
+  },
+  labelPrimary: {
+    color: COLORS.white,
+  },
+  labelOutline: {
+    color: COLORS.primary,
+  },
+  labelDisabled: {
+    color: COLORS.textMuted,
+  },
+  text: {
+    backgroundColor: 'transparent',
+    height: 'auto',
+    paddingHorizontal: 0,
+  },
+  labelText: {
+    ...TYPOGRAPHY.caption,
+    color: COLORS.primary,
+    textDecorationLine: 'underline',
+    textAlign: 'center',
+  },
+  labelTextDisabled: {
+    ...TYPOGRAPHY.caption,
+    color: COLORS.textMuted,
+    textDecorationLine: 'none',
   },
 });
