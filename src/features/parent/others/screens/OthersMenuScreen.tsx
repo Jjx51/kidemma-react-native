@@ -1,30 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-
-import { COLORS } from '@theme';
+import { OthersMenu } from '../../../../components/others/OthersMenu';
 
 export function OthersMenuScreen() {
-  return (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.container}>
-        <Text style={styles.text}>OthersMenuScreen</Text>
-      </View>
-    </SafeAreaView>
-  );
+  return <OthersMenu />;
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: COLORS.background,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 16,
-    color: COLORS.textDark,
-  },
-});
